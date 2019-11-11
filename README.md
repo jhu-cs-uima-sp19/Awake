@@ -1,7 +1,7 @@
 # Awake
 Awake is an alarm clock app that makes users complete a challenge before turning off an alarm. The goal is to help people wake up on time. Currently, the two challenges we plan to implement are the following:
--a shaking exericse where the user shakes the phone a certain number of times to turn off the alarm
--a flashcard challenge where users have to review a set of flashcards to turn off the alarm.
+1. a shaking exericse where the user shakes the phone a certain number of times to turn off the alarm
+2. a flashcard challenge where users have to review a set of flashcards to turn off the alarm.
 
 ## Sprint 1:
 Currently our app has the following features:
