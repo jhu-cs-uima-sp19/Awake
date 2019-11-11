@@ -20,9 +20,10 @@ Current problems:
 2. Should allow canceling when editing or updating alarm.
 3. If user exits challenge activity, openning the app should automatically bring up the challenge screen instead of the MainActivity.
 
-Future plans:
+## Future plans:
+Before we conclude this project, we plan to complete the following tasks:
 1. Fix all our current problems. 
-2. Beyond setting the alarm, we need to implement customization of the alarm such as repeat, sound, name, and challenge.
+2. Beyond setting the alarm, we need to implement customization of the alarm such as repeats, alarm sound, name, and challenge.
 3. We need to implement the shake feature for challenges.
 4. We need to implement the flashcard feature for challenges.
-5. We need to imlement setting up a database for challenges. 
+5. We need to set up a database for the flashcard challenge. 
