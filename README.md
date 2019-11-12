@@ -27,3 +27,4 @@ Before we conclude this project, we plan to complete the following tasks:
 3. We need to implement the shake feature for challenges.
 4. We need to implement the flashcard feature for challenges.
 5. We need to set up a database for the flashcard challenge. 
+6. We need to make the colors and fonts match with our original plan.
