@@ -18,7 +18,7 @@ Currently our app has the following features:
 Current problems:
 1. Alarm is currently not exact (the alarm will sound within ~one minute of set time)
 2. Should allow canceling when editing or updating alarm.
-3. If user exits challenge activity, openning the app should automatically bring up the challenge screen instead of the MainActivity.
+3. If user exits challenge activity, opening the app should automatically bring up the challenge screen instead of the MainActivity.
 
 ## Future plans:
 Before we conclude this project, we plan to complete the following tasks:
