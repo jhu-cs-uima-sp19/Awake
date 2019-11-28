@@ -37,10 +37,12 @@ public class AlarmsAdapter extends ArrayAdapter<Alarm> {
             alarmsView = (LinearLayout) convertView;
         }
 
+        TextView alarm_name_view = (TextView) alarmsView.findViewById(R.id.alarm_name);
         TextView time_view = (TextView) alarmsView.findViewById(R.id.time);
         TextView repeat_view = (TextView) alarmsView.findViewById(R.id.repeat);
         Switch on = (Switch) alarmsView.findViewById(R.id.on);
 
+        alarm_name_view.setText(a.name);
         time_view.setText(a.alarm_time);
         repeat_view.setText(a.repeat_str);
 

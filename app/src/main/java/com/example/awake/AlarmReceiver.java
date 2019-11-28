@@ -18,10 +18,12 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         java.util.Date date = new java.util.Date();
         System.out.println("Alarm ring time: " + date);
+        int requestCode = intent.getIntExtra("alarmRequestCode", -1);
+        System.out.println("Ringing alarm request code: " + requestCode);
 
         wake_up(context);
 
-        mediaPlayer = MediaPlayer.create(context, R.raw.alarm);
+        mediaPlayer = MediaPlayer.create(context, R.raw.boat);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
 
