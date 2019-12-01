@@ -59,8 +59,8 @@ public class AlarmFragment extends Fragment {
     private Button cancel_button;
 
     // Color values
-    private final int selected = 0x30EE3A;
-    private final int unselected = 0xA3A09B;
+    private final int selected = Color.parseColor("#30EE3A");
+    private final int unselected = Color.parseColor("#A3A09B");
 
     private String song_root_path = "C:/Users/Shuha/AndroidStudioProjects/Awake/app/src/main/res/raw/";
 
@@ -72,6 +72,8 @@ public class AlarmFragment extends Fragment {
         initialize_views(view);
         flashcards_button.setEnabled(false);
         exercise_button.setEnabled(false);
+        exercise_button.setBackgroundColor(unselected);
+        flashcards_button.setBackgroundColor(unselected);
 
         // Check if editing or adding new alarm.
         boolean edit = mA.edit;
@@ -107,33 +109,43 @@ public class AlarmFragment extends Fragment {
         challenge_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    System.out.println("Challenge switch is on.");
+                    flashcards_button.setEnabled(true);
+                    exercise_button.setEnabled(true);
                     if(exercise_challenge) {
+                        System.out.println("Exercise challenge button is checked.");
                         exercise_button.setBackgroundColor(selected);
                         flashcards_button.setBackgroundColor(unselected);
                     } else {
+                        System.out.println("Exercise challenge button is NOT checked.");
                         exercise_button.setBackgroundColor(unselected);
                         flashcards_button.setBackgroundColor(selected);
                     }
                 } else {
+                    System.out.println("Challenge switch is not on.");
                     flashcards_button.setEnabled(false);
                     exercise_button.setEnabled(false);
+                    exercise_button.setBackgroundColor(unselected);
+                    flashcards_button.setBackgroundColor(unselected);
                 }
             }
         });
 
         flashcards_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                exercise_challenge = true;
-                exercise_button.setBackgroundColor(selected);
-                flashcards_button.setBackgroundColor(unselected);
+                System.out.println("Flashcard button is clicked.");
+                exercise_challenge = false;
+                exercise_button.setBackgroundColor(unselected);
+                flashcards_button.setBackgroundColor(selected);
             }
         });
 
         exercise_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                exercise_challenge = false;
-                exercise_button.setBackgroundColor(unselected);
-                flashcards_button.setBackgroundColor(selected);
+                System.out.println("Exercise button is clicked.");
+                exercise_challenge = true;
+                exercise_button.setBackgroundColor(selected);
+                flashcards_button.setBackgroundColor(unselected);
             }
         });
 
@@ -209,8 +221,7 @@ public class AlarmFragment extends Fragment {
         int h = alarmTimePicker.getHour();
         int m = alarmTimePicker.getMinute();
         String n = name_edittext.getText().toString();
-        String song_name = song_spinner.getSelectedItem().toString();
-        String song_file_path = song_root_path + song_name + ".mp3";
+        String song = song_spinner.getSelectedItem().toString();
         boolean[] repeats = {false, false, false, false, false, false, false};
         if(mo_radio.isChecked())
             repeats[0] = true;
@@ -227,8 +238,7 @@ public class AlarmFragment extends Fragment {
         if(su_radio.isChecked())
             repeats[6] = true;
         boolean c = challenge_switch.isChecked();
-
-        return new Alarm(h, m, n, song_name, repeats, c, exercise_challenge);
+        return new Alarm(h, m, n, song, repeats, c, exercise_challenge);
     }
 
     public void set_alarm() {

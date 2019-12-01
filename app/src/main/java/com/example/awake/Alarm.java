@@ -19,7 +19,7 @@ public class Alarm implements Comparable<Alarm> {
     /**
      * The path for the alarm soundtrack.
      */
-    public String song_file_path;
+    public String song;
     /**
      * index 0 = monday, 1 = tuesday, 2 = wednesday, 3 = thursday, etc.
      * 1 if alarm is set to repeat on the weekday.
@@ -53,11 +53,11 @@ public class Alarm implements Comparable<Alarm> {
      */
     public boolean on;
 
-    public Alarm(int h, int m, String n, String song_file_path, boolean[] repeats, boolean c, boolean e) {
+    public Alarm(int h, int m, String n, String song, boolean[] repeats, boolean c, boolean e) {
         this.hour = h;
         this.minute = m;
         this.name = n;
-        this.song_file_path = song_file_path;
+        this.song = song;
         this.repeats = repeats;
         this.challenge = c;
         this.exercise_challenge = e;
