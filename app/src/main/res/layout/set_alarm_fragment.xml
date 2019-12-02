@@ -79,49 +79,49 @@
                 android:layout_marginLeft="10dp"
                 android:text="Repeats" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/monday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Monday" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/tuesday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Tuesday" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/wednesday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Wednesday" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/thursday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Thursday" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/friday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Friday" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/saturday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Saturday" />
 
-            <RadioButton
+            <CheckBox
                 android:id="@+id/sunday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

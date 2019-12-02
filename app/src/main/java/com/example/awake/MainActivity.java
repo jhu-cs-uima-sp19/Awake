@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         //for debugging.
         //clear_preferences();
 
-        challenge_in_progress();
-
         load_alarms();
 
         setAlarmFrag = new AlarmFragment();
@@ -91,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     /*
     If alarm has no repeats:
     set it to ring in 7 days or today
@@ -98,34 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
     if an alarm has repeats
     if the alarm is in the past, do not set alarm for today, do it for the next repeat
-     */
-    public static int num_days_to_next_alarm2(boolean[] repeats, boolean not_today) {
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-        day = translate_monday_to_index_zero(day);
 
-        int num_days = 0;
-        int i = 0;
-        if (not_today) {
-            day++;
-            i = 1;
-        }
-        // Using 8 in case it takes one week before alarm rings.
-        for(; i < 8; i ++) {
-            if(!repeats[day]) {
-                num_days++;
-            } else {
-                break;
-            }
-            day++;
-            if(day > 6)
-                day = 0;
-        }
-        return num_days;
-    }
-
-    /*
-    Must have atleast one repeat.
+    Must have at least one repeat.
      */
     public static void update_calender_for_next_alarm(boolean[] repeats, Calendar calendar, boolean not_today) {
         Calendar temp_calendar = Calendar.getInstance();
@@ -142,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
         }
         // Using 8 in case it takes one week before alarm rings.
         for(; i < 8; i ++) {
+            if(day > 6)
+                day = 0;
             if(repeats[day]) {
                 calendar.add(Calendar.DAY_OF_YEAR, num_days);
                 if(calendar.getTimeInMillis() > System.currentTimeMillis())
@@ -152,8 +127,6 @@ public class MainActivity extends AppCompatActivity {
             }
             num_days++;
             day++;
-            if(day > 6)
-                day = 0;
         }
     }
 
@@ -207,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 // Alarm is set for the past so ring it in 7 days.
                 calendar.add(Calendar.DAY_OF_YEAR, 7);
                 // Note, setting day of the week can put time in the past.
+                // Note that incrementing calender day will also increment year when day exceeds 365.
             }
         } else {
             update_calender_for_next_alarm(a.repeats, calendar, false);
@@ -223,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Calender time: " + calendar.getTime());
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent); // Exact alarm not working
         // No Need to manually toggle switch for associated alarm since this method is activated once switch is toggled.
+        save_alarms(); // Update shared preferences for AlarmReceiver. Ideally, should only save whats necessary.
     }
 
     public void deleteAlarm(int position) {
@@ -273,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putInt("hours_" + rc, a.hour);
             editor.putInt("minutes_" + rc, a.minute);
             editor.putString("name_" + rc, a.name);
-            editor.putString("song_" + rc, a.name);
+            editor.putString("song_" + rc, a.song);
             editor.putString("repeats_" + rc, compress_repeats(a.repeats));
             editor.putBoolean("challenge_" + rc, a.challenge);
             editor.putBoolean("exercise_" + rc, a.exercise_challenge);

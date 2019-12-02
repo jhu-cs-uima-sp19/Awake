@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import static android.content.Context.ALARM_SERVICE;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * What happens once the alarm goes off
@@ -35,39 +36,43 @@ public class AlarmReceiver extends BroadcastReceiver {
         boolean challenge = sharedPref.getBoolean("challenge_" + rc, false);
         boolean exercise = sharedPref.getBoolean("exercise_" + rc, false);
 
-        play_song(context, sharedPref.getString("song_" + rc, "boat"));
+        set_next_alarm(context, rc, sharedPref);
 
         if(challenge) {
             // This alarm has a challenge
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("challenge_in_progress", true);
+            play_song(context, sharedPref.getString("song_" + rc, "boat"), true);
             if(exercise) {
                 // This alarm has the exercise/shake challenge.
                 System.out.println("Exercise activity triggered.");
-                editor.putBoolean("exercise_challenge", true);
                 intent = new Intent(context, ShakeActivity.class);
+                intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
             } else {
                 // This alarm has the flashcard challenge.
                 System.out.println("Flashcard activity triggered.");
-                editor.putBoolean("exercise_challenge", false);
                 intent = new Intent(context, ShakeActivity.class);
+                intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
-            editor.apply();
+        } else {
+            play_song(context, sharedPref.getString("song_" + rc, "boat"), false);
+            intent = new Intent(context, MainActivity.class);
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
         }
         release();
 
     }
 
-    private void play_song(Context context, String song) {
+    private void play_song(Context context, String song, boolean loop) {
+        System.out.println("SONG: " + song);
         if(song.equals("boat")) {
             mediaPlayer = MediaPlayer.create(context, R.raw.boat);
-        } else if (song.equals("bell")) {
+        } else {
             mediaPlayer = MediaPlayer.create(context, R.raw.bell);
         }
-        mediaPlayer.setLooping(true);
+        mediaPlayer.setLooping(loop);
         mediaPlayer.start();
     }
 
