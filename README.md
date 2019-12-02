@@ -33,21 +33,21 @@ Before we conclude this project, we plan to complete the following tasks:
 
 After sprint 2, our app now has the following features:
 1. Users can now customize alarms to include the following:
-1a. Name of alarm
-1b. Alarm sounds
-1c. Day(s) of the week to repeat the alarm
-1d. Whether they want to include a challenge or not
-1e. Which challenge to include if a challenge is desired
+* Name of alarm
+* Alarm sounds
+* Day(s) of the week to repeat the alarm
+* Whether they want to include a challenge or not
+* Which challenge to include if a challenge is desired
 2. Cancel editing or creating new alarms
 
 The tests we have conducted to verify the repeat function of the alarm:
 1. Non-repeating alarms:
-1a. Setting an alarm time in the past. Desired function is to then set the alarm for the next day.
-1b. Setting an alarm time in the future. Desired function is to ring the alarm once then turn off the alarm.
+* Setting an alarm time in the past. Desired function is to then set the alarm for the next day.
+* Setting an alarm time in the future. Desired function is to ring the alarm once then turn off the alarm.
 2. Repeating alarms:
-2a. Chaining repeats. Desired function is to properly set the next alarm after the first one rings.
-2b. Repeating an alarm today but set the alarm time for the past. Next alarm should be one week from today.
-2c. Repeating alarm today and one later but alarm time is set in the past. Next alarm should not be today.
-2d. Repeating alarm today and one later but alarm time is set in the future. Next alarm should be today.
+* Chaining repeats. Desired function is to properly set the next alarm after the first one rings.
+* Repeating an alarm today but set the alarm time for the past. Next alarm should be one week from today.
+* Repeating alarm today and one later but alarm time is set in the past. Next alarm should not be today.
+* Repeating alarm today and one later but alarm time is set in the future. Next alarm should be today.
 
 
