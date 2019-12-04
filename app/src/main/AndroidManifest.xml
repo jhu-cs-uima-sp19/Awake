@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.awake.MainActivity">
+        <activity android:name=".CustomizeShakesFragment"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +20,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.awake.ShakeActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:name=".ShakeActivity"
+            android:screenOrientation="portrait"></activity>
+
         <service
             android:name=".AlarmService"
             android:enabled="true" />
-        <receiver android:name="com.example.awake.AlarmReceiver" />
+
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

@@ -137,6 +137,7 @@ public class AlarmFragment extends Fragment {
                 exercise_challenge = true;
                 exercise_button.setBackgroundColor(selected);
                 flashcards_button.setBackgroundColor(unselected);
+                mA.start_customize_shake_activity();
             }
         });
 

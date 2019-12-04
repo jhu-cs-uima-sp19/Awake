@@ -90,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void start_customize_shake_activity() {
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, new CustomizeShakesFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     /*
     If alarm has no repeats:
     set it to ring in 7 days or today
