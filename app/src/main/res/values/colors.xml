@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF9800</color>
     <color name="selected">#30EE3A</color>
     <color name="unselected">#A3A09B</color>
+
+    <color name="salmon">#ffccbc</color>
+    <color name="black">#000000</color>
 </resources>

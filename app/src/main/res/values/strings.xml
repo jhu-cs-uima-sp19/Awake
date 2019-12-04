@@ -4,4 +4,9 @@
     <string name="alarm_sound">Alarm Sound</string>
     <string name="challenge">Challenge</string>
     <string name="repeat">Repeat</string>
+
+    <string name="shake_text">Shake Phone</string>
+    <string name="shake_hint">20 times!</string>
+    <string name="count">Count:</string>
+    <string name="done">Done</string>
 </resources>
