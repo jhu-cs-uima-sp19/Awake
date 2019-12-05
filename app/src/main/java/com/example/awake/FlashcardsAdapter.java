@@ -1,6 +1,8 @@
 package com.example.awake;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import java.util.List;
 public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
     private int resource;
     private List<Flashcard> list = new ArrayList<Flashcard>();
+    private MainActivity mA;
 
     public FlashcardsAdapter(Context ctx, int res, List<Flashcard> items)
     {
@@ -26,8 +29,7 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LinearLayout flashcardsView;
-        Flashcard f = getItem(position);
-
+        final Flashcard f = getItem(position);
         if (convertView == null) {
             flashcardsView = new LinearLayout(getContext());
             String inflater = Context.LAYOUT_INFLATER_SERVICE;
@@ -44,7 +46,15 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                list.remove(position);
+                new AlertDialog.Builder(mA)
+                        .setTitle("Warning")
+                        .setMessage("Delete " + f.getName() + " card?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                list.remove(position);
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
                 notifyDataSetChanged();
             }
         });
