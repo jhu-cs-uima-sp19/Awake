@@ -51,7 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             } else {
                 // This alarm has the flashcard challenge.
                 System.out.println("Flashcard activity triggered.");
-                intent = new Intent(context, ShakeActivity.class);
+                intent = new Intent(context, FlashcardActivity.class);
                 intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
