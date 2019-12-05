@@ -12,6 +12,8 @@
 
     <string name="enter_term">Enter Term</string>
     <string name="next">Next</string>
+    <string name="correct">Correct!</string>
+    <string name="wrong">Wrong!</string>
 
     <string name="add_card">ADD CARD</string>
     <string name="term">Term</string>
