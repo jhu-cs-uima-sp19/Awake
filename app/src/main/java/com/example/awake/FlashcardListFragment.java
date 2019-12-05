@@ -33,24 +33,18 @@ public class FlashcardListFragment extends Fragment {
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
         flashcard_list_view = (ListView) view.findViewById(R.id.flashcard_list);
-        FlashcardsAdapter adapter = new FlashcardsAdapter(this, R.layout.flashcards_list_fragment, flashcards);
+        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, flashcards);
         flashcard_list_view.setAdapter(adapter);
 
         return view;
     }
 
     public void update_list_view() {
-        /*
-        I need to book keep that fact that the switch can turn by tapping and also by updating or setting
-        a new alarm.
-         */
-
-        Collections.sort(mA.alarms);
 
         // make array adapter to bind arraylist to listview with new custom item layout
-        AlarmsAdapter aa = new AlarmsAdapter(mA, R.layout.alarm_entry, mA.alarms);
-        alarm_list_view.setAdapter(aa);
-        registerForContextMenu(alarm_list_view);
+        FlashcardsAdapter aa = new FlashcardsAdapter(getActivity(), R.layout.card_entry, list);
+        flashcard_list_view.setAdapter(aa);
+        registerForContextMenu(flashcard_list_view);
         aa.notifyDataSetChanged();  // to refresh items in the list
     }
 
