@@ -19,7 +19,6 @@ public class FlashcardListFragment extends Fragment {
     private MainActivity mA;
     private ListView flashcard_list_view;
     public List<Flashcard> flashcards = new ArrayList<>();
-    FlashcardEntryFragment flashcardEntryFragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
