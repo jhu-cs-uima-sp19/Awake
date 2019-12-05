@@ -57,6 +57,7 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
                                 list.remove(position);
                             }})
                         .setNegativeButton(android.R.string.no, null).show();
+                list.remove(position); //or some other task
                 notifyDataSetChanged();
             }
         });

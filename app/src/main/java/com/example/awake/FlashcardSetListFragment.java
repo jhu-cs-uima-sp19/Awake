@@ -21,29 +21,27 @@ public class FlashcardSetListFragment extends Fragment {
      * Activity this fragment is apart of.
      */
     private MainActivity mA;
-    private ListView flashcard_list_view;
-    public List<Flashcard> flashcards = new ArrayList<>();
+    private ListView cardset_list_view;
+    public List<FlashcardSet> set_cards = mA.cardsets;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.flashcards_list_fragment, container, false);
+        View view = inflater.inflate(R.layout.cardset_list_fragment, container, false);
         // Naming toolbar.
-        mA.getSupportActionBar().setTitle("Add Flashcards");
+        mA.getSupportActionBar().setTitle("Manage Flashcards");
 
         //load a set here
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
-        flashcard_list_view = (ListView) view.findViewById(R.id.flashcard_list);
-        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, flashcards);
-        flashcard_list_view.setAdapter(adapter);
+        cardset_list_view = (ListView) view.findViewById(R.id.flashcard_list);
+        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, set_cards);
+        cardset_list_view.setAdapter(adapter);
 
-        final FloatingActionButton add = view.findViewById(R.id.add_alarm);
+        final FloatingActionButton add = view.findViewById(R.id.add_cardset);
         add.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                flashcards.add(new Flashcard("", ""));
-                update_list_view();
-            }
+            List<Flashcard> new_cards = new ArrayList<Flashcard>();
+            set_cards.add(new FlashcardSet("New Set", new_cards));
         });
         return view;
     }

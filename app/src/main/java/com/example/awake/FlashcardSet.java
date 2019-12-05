@@ -27,5 +27,9 @@ public class FlashcardSet {
         this.listlen = cardlist.size();
     }
 
+    public void refreshLen() {
+        this.listlen = cardlist.size();
+    }
+
 }
 

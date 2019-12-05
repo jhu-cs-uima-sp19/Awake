@@ -128,6 +128,7 @@ public class AlarmFragment extends Fragment {
                 exercise_challenge = false;
                 exercise_button.setBackgroundColor(unselected);
                 flashcards_button.setBackgroundColor(selected);
+                mA.start_cardset_list_fragment();
             }
         });
 

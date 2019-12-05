@@ -38,7 +38,7 @@ public class FlashcardListFragment extends Fragment {
         FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, flashcards);
         flashcard_list_view.setAdapter(adapter);
 
-        final FloatingActionButton add = view.findViewById(R.id.add_alarm);
+        final FloatingActionButton add = view.findViewById(R.id.add_flashcard);
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 flashcards.add(new Flashcard("", ""));
@@ -66,5 +66,10 @@ public class FlashcardListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDetach() {
+        mA.cardsets.get(0).refreshLen();
+        super.onDetach();
+    }
 
 }
