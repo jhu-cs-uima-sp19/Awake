@@ -9,4 +9,7 @@
     <string name="shake_hint">20 times!</string>
     <string name="count">Count:</string>
     <string name="done">Done</string>
+
+    <string name="enter_term">Enter Term</string>
+    <string name="next">Next</string>
 </resources>
