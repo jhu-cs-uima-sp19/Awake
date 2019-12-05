@@ -16,10 +16,10 @@ import java.util.ArrayList;
  */
 public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
 
-    private ArrayList<FlashcardSet> list = new ArrayList<FlashcardSet>();
+    private List<FlashcardSet> list = new ArrayList<FlashcardSet>();
     private int resource;
 
-    public FlashcardSetAdapter(Context ctx, int res, ArrayList<FlashcardSet> items)
+    public FlashcardSetAdapter(Context ctx, int res, List<FlashcardSet> items)
     {
         super(ctx, res, items);
         resource = res;
