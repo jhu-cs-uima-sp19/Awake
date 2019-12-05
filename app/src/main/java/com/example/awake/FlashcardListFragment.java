@@ -10,6 +10,8 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +38,13 @@ public class FlashcardListFragment extends Fragment {
         FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, flashcards);
         flashcard_list_view.setAdapter(adapter);
 
+        final FloatingActionButton add = view.findViewById(R.id.add_alarm);
+        add.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                flashcards.add(new Flashcard("", ""));
+                update_list_view();
+            }
+        });
         return view;
     }
 
