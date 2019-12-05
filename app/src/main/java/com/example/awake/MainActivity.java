@@ -10,9 +10,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     public AlarmManager alarmManager;
     public List<Alarm> alarms = new ArrayList<>();
 
+    /*
+     * Load in flashcards: instantiate the variable
+     */
+    public List<FlashcardSet> cardsets = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +61,66 @@ public class MainActivity extends AppCompatActivity {
 
         // Starts App with ListView.
         start_alarms_list_fragment();
+
+        cardsets = readCards();
+
+    }
+
+    /*
+     * Load in flashcards: make the method
+     */
+    private List<FlashcardSet> readCards() {
+        Moshi moshi = new Moshi.Builder().build();
+        Type type = Types.newParameterizedType(List.class, FlashcardSet.class);
+        JsonAdapter<List> adapter = moshi.adapter(type);
+
+        String filename = "cards.json";
+        /*
+         * If this is called within a fragment, remember to change to getActivity()
+         */
+        Context context = this;
+
+        try {
+            /*
+             * If the file doesn't exist yet, this will go to catch, where a default list
+             * of flashcard sets would be created
+             */
+            FileInputStream fis = context.openFileInput(filename);
+            InputStreamReader inputStreamReader =
+                    new InputStreamReader(fis, StandardCharsets.UTF_8);
+            StringBuilder stringBuilder = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+                String line = reader.readLine();
+                while (line != null) {
+                    stringBuilder.append(line).append('\n');
+                    line = reader.readLine();
+                }
+            } catch (Exception e) {
+                // Error occurred when opening raw file for reading.
+            } finally {
+                String contents = stringBuilder.toString();
+                System.out.println("reading success");
+                System.out.println(contents);
+
+                List<FlashcardSet> tests = adapter.fromJson(contents);
+                return tests;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            /*
+             * Creating a new list of flashcard sets
+             */
+            List<Flashcard> list = new ArrayList<Flashcard>();
+            list.add(new Flashcard("title1", "content1"));
+            list.add(new Flashcard("title2", "content2"));
+            FlashcardSet set1 = new FlashcardSet("test1", list);
+            List<FlashcardSet> list_set = new ArrayList<FlashcardSet>();
+            list_set.add(set1);
+
+            return list_set;
+
+        }
     }
 
     /**
@@ -93,13 +167,6 @@ public class MainActivity extends AppCompatActivity {
     public void start_customize_shake_activity() {
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainer, new CustomizeShakesFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    public void start_manage_cardset_fragment() {
-        transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, new ManageFlashcardSets());
         transaction.addToBackStack(null);
         transaction.commit();
     }
