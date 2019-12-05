@@ -18,6 +18,7 @@ public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
 
     private List<FlashcardSet> list = new ArrayList<FlashcardSet>();
     private int resource;
+    private MainActivity mA;
 
     public FlashcardSetAdapter(Context ctx, int res, List<FlashcardSet> items)
     {
@@ -61,8 +62,7 @@ public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
             @Override
             public void onClick(View v) {
                 //do something
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
+                mA.start_card_list_fragment();
             }
         });
 

@@ -164,6 +164,20 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void start_card_list_fragment() {
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, new FlashcardListFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void start_cardset_list_fragment() {
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, new FlashcardSetListFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     public void start_customize_shake_activity() {
         transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainer, new CustomizeShakesFragment());
