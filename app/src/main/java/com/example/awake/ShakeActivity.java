@@ -96,6 +96,7 @@ public class ShakeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         shaking_times.setText(String.valueOf(shakingTimes));
+        shake_hint.setText(String.valueOf(shakingTimes) + " Times");
         mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
 

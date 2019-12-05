@@ -97,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void start_manage_cardset_fragment() {
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, new ManageFlashcardSets());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     /*
     If alarm has no repeats:
     set it to ring in 7 days or today
