@@ -27,7 +27,9 @@ public class FlashcardActivity extends AppCompatActivity {
     private TextView description;
     private EditText term;
     private Button next;
+    private Button done;
     private TextView result;
+    private MainActivity mA;
     private List<Flashcard> flashcards;
 
     @Override
@@ -37,41 +39,57 @@ public class FlashcardActivity extends AppCompatActivity {
         // CHANGE TOOLBAR TITLE.
         getSupportActionBar().setTitle("Flashcards");
         //get flashcard
-        flashcards = new ArrayList<>(); //replace this with some way to import the cards
-        final Flashcard flashcard = flashcards.get(0);
+        List<FlashcardSet> sets = mA.cardsets;
+        flashcards = sets.get(0).getCardlist();
         //how to iterate between cards...
         description = (TextView) findViewById(R.id.flashcardtext);
-        description.setText(flashcard.getContent());
         term = (EditText) findViewById(R.id.entertext);
         result = (TextView) findViewById(R.id.result);
-        term.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    if (term.getText().equals(flashcard.getName())) {
-                        result.setText("Correct!");
-                        result.setTextColor(Color.GREEN);
-                    } else {
-                        result.setText("Wrong!");
-                        result.setTextColor(Color.RED);
-                        new AlertDialog.Builder(getParent())
-                                .setMessage("The correct answer is \\\" " + flashcard.getName() + " \\\"")
-                                .setNeutralButton(android.R.string.ok, null).show();
-                        return true;
-
-                    }
-                }
-                return false;
-            }
-        });
-
         next = (Button) findViewById(R.id.next);
-        next.setOnClickListener(new View.OnClickListener() {
+        done = (Button) findViewById(R.id.done);
+        done.setBackgroundColor(Color.RED);
+        done.setEnabled(false);
+        for (int i = 0; i < flashcards.size(); i++) {
+            final Flashcard flashcard = flashcards.get(i);
+            description.setText(flashcard.getContent());
+            term.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        if (term.getText().equals(flashcard.getName())) {
+                            result.setText("Correct!");
+                            result.setTextColor(Color.GREEN);
+                        } else {
+                            result.setText("Wrong!");
+                            result.setTextColor(Color.RED);
+                            new AlertDialog.Builder(getParent())
+                                    .setMessage("The correct answer is \\\" " + flashcard.getName() + " \\\"")
+                                    .setNeutralButton(android.R.string.ok, null).show();
+                            return true;
+
+                        }
+                        next.setOnClickListener(new View.OnClickListener() {
+                            public void onClick(View v) {
+                                result.setText("");
+                                //set the card to be next description tag of card
+                            }
+                        });
+                    }
+                    return false;
+                }
+            });
+        }
+        done.setEnabled(true);
+        done.setBackgroundColor(Color.GREEN);
+        done.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                result.setText("");
-                //set the card to be next description tag of card
+                AlarmReceiver.mediaPlayer.stop();
+                startActivity(new Intent(FlashcardActivity.this, MainActivity.class));
+
             }
         });
+
+
 
         //set condition for done: when last card is picked
         /*done.setOnClickListener(new View.OnClickListener() {
