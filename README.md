@@ -39,6 +39,10 @@ After sprint 2, our app now has the following features:
 * Whether they want to include a challenge or not
 * Which challenge to include if a challenge is desired
 2. Cancel editing or creating new alarms
+3. Once the exercise activity is selected, the user will be taken to a new screen to set the number of shakes.
+4. The exercise activity launches once the alarm rings and the shaking feature works properly.
+* Note that the app is sensitive to changes in acceleration so violent shakes can cause the count to repeatly decrease, almost as if it is decreasing by increments of more than one.
+5. Alarms can ring even when phone is off.
 
 The tests we have conducted to verify the repeat function of the alarm:
 1. Non-repeating alarms:
