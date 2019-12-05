@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +41,8 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
             flashcardsView = (LinearLayout) convertView;
         }
 
-        EditText term_view = (EditText) flashcardsView.findViewById(R.id.term_input);
-        EditText definition_view = (EditText) flashcardsView.findViewById(R.id.definition_input );
+        final EditText term_view = (EditText) flashcardsView.findViewById(R.id.term_input);
+        final EditText definition_view = (EditText) flashcardsView.findViewById(R.id.definition_input );
         ImageButton delete = (ImageButton) flashcardsView.findViewById(R.id.delete);
 
         delete.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +64,27 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
         term_view.setText(f.getName());
         definition_view.setText(f.getContent());
 
+        term_view.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                f.setName(term_view.getText().toString());
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        definition_view.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                f.setName(definition_view.getText().toString());
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
 
         return flashcardsView;
     }
