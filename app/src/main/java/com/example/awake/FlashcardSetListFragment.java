@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FlashcardListFragment extends Fragment {
+public class FlashcardSetListFragment extends Fragment {
     /**
      * Activity this fragment is apart of.
      */
     private MainActivity mA;
     private ListView flashcard_list_view;
-    public List<Flashcard> flashcards = mA.cardsets.get(0).getCardlist();
+    public List<Flashcard> flashcards = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,3 +68,4 @@ public class FlashcardListFragment extends Fragment {
 
 
 }
+
