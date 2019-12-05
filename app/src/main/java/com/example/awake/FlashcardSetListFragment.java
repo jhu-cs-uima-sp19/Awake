@@ -34,14 +34,18 @@ public class FlashcardSetListFragment extends Fragment {
         //load a set here
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
-        cardset_list_view = (ListView) view.findViewById(R.id.flashcard_list);
-        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, set_cards);
+        cardset_list_view = (ListView) view.findViewById(R.id.cardset_list);
+        FlashcardSetAdapter adapter = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, set_cards);
         cardset_list_view.setAdapter(adapter);
 
         final FloatingActionButton add = view.findViewById(R.id.add_cardset);
         add.setOnClickListener(new View.OnClickListener() {
-            List<Flashcard> new_cards = new ArrayList<Flashcard>();
-            set_cards.add(new FlashcardSet("New Set", new_cards));
+            public void onClick(View v) {
+                List<Flashcard> new_cards = new ArrayList<Flashcard>();
+                FlashcardSet new_set = new FlashcardSet("New Set", new_cards);
+                set_cards.add(new_set);
+                update_list_view();
+            }
         });
         return view;
     }
@@ -49,9 +53,9 @@ public class FlashcardSetListFragment extends Fragment {
     public void update_list_view() {
 
         // make array adapter to bind arraylist to listview with new custom item layout
-        FlashcardsAdapter aa = new FlashcardsAdapter(getActivity(), R.layout.card_entry, flashcards);
-        flashcard_list_view.setAdapter(aa);
-        registerForContextMenu(flashcard_list_view);
+        FlashcardSetAdapter aa = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, set_cards);
+        cardset_list_view.setAdapter(aa);
+        registerForContextMenu(cardset_list_view);
         aa.notifyDataSetChanged();  // to refresh items in the list
     }
 
@@ -62,6 +66,11 @@ public class FlashcardSetListFragment extends Fragment {
         if (context instanceof MainActivity){
             mA =(MainActivity) context;
         }
+    }
+
+    public void onDetach() {
+
+        super.onDetach();
     }
 
 
