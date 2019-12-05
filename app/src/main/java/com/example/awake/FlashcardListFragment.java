@@ -42,7 +42,7 @@ public class FlashcardListFragment extends Fragment {
     public void update_list_view() {
 
         // make array adapter to bind arraylist to listview with new custom item layout
-        FlashcardsAdapter aa = new FlashcardsAdapter(getActivity(), R.layout.card_entry, list);
+        FlashcardsAdapter aa = new FlashcardsAdapter(getActivity(), R.layout.card_entry, flashcards);
         flashcard_list_view.setAdapter(aa);
         registerForContextMenu(flashcard_list_view);
         aa.notifyDataSetChanged();  // to refresh items in the list
