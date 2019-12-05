@@ -14,14 +14,13 @@ import java.util.List;
 
 public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
     private int resource;
-    private Context context;
     private List<Flashcard> list = new ArrayList<Flashcard>();
 
     public FlashcardsAdapter(Context ctx, int res, List<Flashcard> items)
     {
         super(ctx, res, items);
         this.list = items;
-        this.context = ctx;
+        this.resource = res;
     }
 
     @Override
