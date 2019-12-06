@@ -37,7 +37,6 @@ public class CustomizeShakesFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putInt("shakes", num_shakes);
                 editor.apply();
-                mA.exercise_challenge = true;
                 mA.start_set_alarm_fragment();
             }
         });
