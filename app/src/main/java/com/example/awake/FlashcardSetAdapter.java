@@ -1,6 +1,7 @@
 package com.example.awake;
 
 import android.content.Context;
+import android.media.Image;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
@@ -46,8 +48,8 @@ public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
 
         final EditText titleView = (EditText) cardsetView.findViewById(R.id.title_text);
         TextView lenView = (TextView) cardsetView.findViewById(R.id.len_text);
-        Button edit = (Button) cardsetView.findViewById(R.id.edit_cardset);
-        Button delete = (Button) cardsetView.findViewById(R.id.delete_cardset);
+        ImageButton edit = (ImageButton) cardsetView.findViewById(R.id.edit_cardset);
+        ImageButton delete = (ImageButton) cardsetView.findViewById(R.id.delete_cardset);
 
         titleView.setText(cs.getTitle());
         lenView.setText(String.valueOf(cs.getListlen()));
