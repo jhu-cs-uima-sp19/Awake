@@ -26,6 +26,7 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
         super(ctx, res, items);
         this.list = items;
         this.resource = res;
+        mA = (MainActivity) ctx;
     }
 
     @Override
@@ -69,6 +70,7 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
 
             public void afterTextChanged(Editable s) {
                 f.setName(term_view.getText().toString());
+                notifyDataSetChanged();
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -80,6 +82,7 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
 
             public void afterTextChanged(Editable s) {
                 f.setName(definition_view.getText().toString());
+                notifyDataSetChanged();
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
