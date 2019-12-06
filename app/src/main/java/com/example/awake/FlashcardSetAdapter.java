@@ -42,7 +42,7 @@ public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
         }
 
         EditText titleView = (EditText) cardsetView.findViewById(R.id.title_text);
-        TextView lenView = (TextView) cardsetView.findViewById(R.id.len_text);
+        EditText lenView = (EditText) cardsetView.findViewById(R.id.len_text);
         Button edit = (Button) cardsetView.findViewById(R.id.edit_cardset);
         Button delete = (Button) cardsetView.findViewById(R.id.delete_cardset);
 

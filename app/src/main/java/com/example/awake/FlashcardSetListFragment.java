@@ -11,7 +11,13 @@ import androidx.fragment.app.Fragment;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +28,6 @@ public class FlashcardSetListFragment extends Fragment {
      */
     private MainActivity mA;
     private ListView cardset_list_view;
-    public List<FlashcardSet> set_cards = mA.cardsets;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +40,7 @@ public class FlashcardSetListFragment extends Fragment {
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
         cardset_list_view = (ListView) view.findViewById(R.id.cardset_list);
-        FlashcardSetAdapter adapter = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, set_cards);
+        FlashcardSetAdapter adapter = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, mA.cardsets);
         cardset_list_view.setAdapter(adapter);
 
         final FloatingActionButton add = view.findViewById(R.id.add_cardset);
@@ -43,7 +48,7 @@ public class FlashcardSetListFragment extends Fragment {
             public void onClick(View v) {
                 List<Flashcard> new_cards = new ArrayList<Flashcard>();
                 FlashcardSet new_set = new FlashcardSet("New Set", new_cards);
-                set_cards.add(new_set);
+                mA.cardsets.add(new_set);
                 update_list_view();
             }
         });
@@ -53,7 +58,7 @@ public class FlashcardSetListFragment extends Fragment {
     public void update_list_view() {
 
         // make array adapter to bind arraylist to listview with new custom item layout
-        FlashcardSetAdapter aa = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, set_cards);
+        FlashcardSetAdapter aa = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, mA.cardsets);
         cardset_list_view.setAdapter(aa);
         registerForContextMenu(cardset_list_view);
         aa.notifyDataSetChanged();  // to refresh items in the list
@@ -69,6 +74,23 @@ public class FlashcardSetListFragment extends Fragment {
     }
 
     public void onDetach() {
+        Moshi moshi = new Moshi.Builder().build();
+        Type type = Types.newParameterizedType(List.class, FlashcardSet.class);
+        JsonAdapter<List> adapter = moshi.adapter(type);
+
+        String json = adapter.toJson(mA.cardsets);
+
+        String filename = "cards.json";
+        try {
+            FileOutputStream fileout = getActivity().openFileOutput(filename, Context.MODE_PRIVATE);
+            OutputStreamWriter outputWriter = new OutputStreamWriter(fileout);
+            outputWriter.write(json);
+            outputWriter.close();
+            System.out.println("writing success");
+        } catch (Exception e) {
+            System.out.println("writing failed");
+            e.printStackTrace();
+        }
 
         super.onDetach();
     }

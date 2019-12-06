@@ -16,17 +16,18 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:gravity="left"
             android:textSize="28dp">
         </EditText>
 
-        <TextView
+        <EditText
             android:id="@+id/len_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="22dp"></TextView>
+            android:textSize="22dp"></EditText>
 
         <Button
             android:id="@+id/edit_cardset"

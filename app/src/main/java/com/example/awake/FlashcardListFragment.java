@@ -22,7 +22,6 @@ public class FlashcardListFragment extends Fragment {
      */
     private MainActivity mA;
     private ListView flashcard_list_view;
-    public List<Flashcard> flashcards = mA.cardsets.get(0).getCardlist();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,13 +34,13 @@ public class FlashcardListFragment extends Fragment {
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
         flashcard_list_view = (ListView) view.findViewById(R.id.flashcard_list);
-        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, flashcards);
+        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, mA.cardsets.get(0).getCardlist());
         flashcard_list_view.setAdapter(adapter);
 
         final FloatingActionButton add = view.findViewById(R.id.add_flashcard);
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                flashcards.add(new Flashcard("", ""));
+                mA.cardsets.get(0).getCardlist().add(new Flashcard("", ""));
                 update_list_view();
             }
         });
@@ -51,7 +50,7 @@ public class FlashcardListFragment extends Fragment {
     public void update_list_view() {
 
         // make array adapter to bind arraylist to listview with new custom item layout
-        FlashcardsAdapter aa = new FlashcardsAdapter(getActivity(), R.layout.card_entry, flashcards);
+        FlashcardsAdapter aa = new FlashcardsAdapter(getActivity(), R.layout.card_entry, mA.cardsets.get(0).getCardlist());
         flashcard_list_view.setAdapter(aa);
         registerForContextMenu(flashcard_list_view);
         aa.notifyDataSetChanged();  // to refresh items in the list
