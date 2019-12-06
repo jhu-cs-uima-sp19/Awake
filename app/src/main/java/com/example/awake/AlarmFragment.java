@@ -103,6 +103,7 @@ public class AlarmFragment extends Fragment {
                     System.out.println("Challenge switch is on.");
                     flashcards_button.setEnabled(true);
                     exercise_button.setEnabled(true);
+                    if(exercise_challenge)
                     if(exercise_challenge) {
                         System.out.println("Exercise challenge button is checked.");
                         exercise_button.setBackgroundColor(selected);
