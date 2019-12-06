@@ -60,9 +60,8 @@
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:background="#cd0000"
-        android:src="@drawable/round_clear_black_18dp"
-        android:scaleType="fitCenter"
+        android:src="@drawable/delete"
+        android:background="@null"
         android:onClick="deleteItem"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
