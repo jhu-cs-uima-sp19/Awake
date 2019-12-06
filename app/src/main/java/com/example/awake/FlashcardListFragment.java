@@ -34,7 +34,7 @@ public class FlashcardListFragment extends Fragment {
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
         flashcard_list_view = (ListView) view.findViewById(R.id.flashcard_list);
-        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.flashcards_list_fragment, mA.cardsets.get(0).getCardlist());
+        FlashcardsAdapter adapter = new FlashcardsAdapter(getActivity(), R.layout.card_entry, mA.cardsets.get(0).getCardlist());
         flashcard_list_view.setAdapter(adapter);
 
         final FloatingActionButton add = view.findViewById(R.id.add_flashcard);

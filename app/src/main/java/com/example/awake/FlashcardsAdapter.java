@@ -26,7 +26,7 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
         super(ctx, res, items);
         this.list = items;
         this.resource = res;
-        mA = (MainActivity) ctx;
+        this.mA = (MainActivity) ctx;
     }
 
     @Override
@@ -46,22 +46,22 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
         final EditText definition_view = (EditText) flashcardsView.findViewById(R.id.definition_input );
         ImageButton delete = (ImageButton) flashcardsView.findViewById(R.id.delete);
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(mA)
-                        .setTitle("Warning")
-                        .setMessage("Delete " + f.getName() + " card?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                list.remove(position);
-                            }})
-                        .setNegativeButton(android.R.string.no, null).show();
-                list.remove(position); //or some other task
-                notifyDataSetChanged();
-            }
-        });
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new AlertDialog.Builder(mA)
+//                        .setTitle("Warning")
+//                        .setMessage("Delete " + f.getName() + " card?")
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int whichButton) {
+//                                list.remove(position);
+//                            }})
+//                        .setNegativeButton(android.R.string.no, null).show();
+//                list.remove(position); //or some other task
+//                notifyDataSetChanged();
+//            }
+//        });
 
         term_view.setText(f.getName());
         definition_view.setText(f.getContent());
@@ -88,6 +88,15 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        delete.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //do something
+                list.remove(position); //or some other task
+                notifyDataSetChanged();
+            }
         });
 
         return flashcardsView;

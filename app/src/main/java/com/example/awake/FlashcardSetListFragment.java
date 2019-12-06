@@ -47,6 +47,7 @@ public class FlashcardSetListFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 List<Flashcard> new_cards = new ArrayList<Flashcard>();
+                new_cards.add(new Flashcard());
                 FlashcardSet new_set = new FlashcardSet("New Set", new_cards);
                 mA.cardsets.add(new_set);
                 update_list_view();

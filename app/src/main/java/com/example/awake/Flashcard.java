@@ -10,6 +10,10 @@ public class Flashcard {
         this.setAll(name, content);
     }
 
+    Flashcard() {
+        this.setAll("", "");
+    }
+
     public String getName() { return name; }
     public String getContent() { return content; }
 
