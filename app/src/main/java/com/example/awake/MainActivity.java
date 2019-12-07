@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean edit;
     public int position;
+    public boolean exercise = true;
 
     /**
      * Allows you to send intents at some time in the future.

@@ -77,8 +77,8 @@ public class FlashcardSetListFragment extends Fragment {
 
         donefcset.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Update or create new alarm. THIS NEEDS TO BE UPDATED ONCE REPEATS ARE IMPLEMENTED.
                 save();
+                mA.exercise = false;
                 // Will switch in ListView fragment and update the ArrayAdapter.
                 mA.start_set_alarm_fragment();
             }

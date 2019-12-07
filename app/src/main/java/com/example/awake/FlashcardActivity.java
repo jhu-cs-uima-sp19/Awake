@@ -33,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FlashcardActivity extends AppCompatActivity {
 
     private TextView description;
@@ -73,7 +74,7 @@ public class FlashcardActivity extends AppCompatActivity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                System.out.println("Next button pressed");
+                System.out.println("Next button git ppressed");
                 if (i < flashcards.size() - 1) {
                     i++;
                     updateFlashcards(i);
@@ -127,6 +128,7 @@ public class FlashcardActivity extends AppCompatActivity {
                         System.out.println(term.getText());
                         term.setText(flashcard.getName());
                         System.out.println(flashcard.getName());
+
 //                            return true;
 
                     }

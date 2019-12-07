@@ -31,7 +31,7 @@ public class AlarmFragment extends Fragment {
     /**
      * If challenge enabled, then exercise challenge enabled?
      */
-    public boolean exercise_challenge = true;
+    public boolean exercise_challenge;
 
     // View components;
 
@@ -60,6 +60,7 @@ public class AlarmFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.set_alarm_fragment, container, false);
         mA.getSupportActionBar().setTitle("Set Alarms");
+        exercise_challenge = mA.exercise;
         initialize_views(view);
         flashcards_button.setEnabled(false);
         exercise_button.setEnabled(false);
@@ -103,7 +104,6 @@ public class AlarmFragment extends Fragment {
                     System.out.println("Challenge switch is on.");
                     flashcards_button.setEnabled(true);
                     exercise_button.setEnabled(true);
-                    if(exercise_challenge)
                     if(exercise_challenge) {
                         System.out.println("Exercise challenge button is checked.");
                         exercise_button.setBackgroundColor(selected);
