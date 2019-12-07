@@ -39,6 +39,7 @@ public class FlashcardActivity extends AppCompatActivity {
     private EditText term;
     private Button next;
     private Button done;
+    private Button quit;
     private TextView result;
     private List<Flashcard> flashcards;
     public List<FlashcardSet> cardsets = new ArrayList<>();
@@ -106,16 +107,14 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //set condition for done: when last card is picked
-        /*done.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        quit = (Button) findViewById(R.id.quit);
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 AlarmReceiver.mediaPlayer.stop();
                 startActivity(new Intent(FlashcardActivity.this, MainActivity.class));
-
             }
-        }); */
+        });
     }
 
     /*

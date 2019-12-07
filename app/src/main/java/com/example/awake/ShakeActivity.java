@@ -29,6 +29,7 @@ public class ShakeActivity extends AppCompatActivity {
     private TextView count;
     private TextView shaking_times;
     private Button done;
+    private Button quit;
 
     private final SensorEventListener mSensorListener = new SensorEventListener() {
 
@@ -90,6 +91,16 @@ public class ShakeActivity extends AppCompatActivity {
 
             }
         });
+        quit = (Button) findViewById(R.id.quit);
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlarmReceiver.mediaPlayer.stop();
+                startActivity(new Intent(ShakeActivity.this, MainActivity.class));
+            }
+        });
+
+
     }
 
     @Override
