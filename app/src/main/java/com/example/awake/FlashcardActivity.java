@@ -73,7 +73,12 @@ public class FlashcardActivity extends AppCompatActivity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //System.out.println("Next button pressed");
+                if ( i == flashcards.size() - 1) {
+                    next.setEnabled(false);
+                    next.setVisibility(View.GONE);
+                    done.setEnabled(true);
+                    done.setBackgroundColor(Color.GREEN);
+                }
                 if (i < flashcards.size() - 1) {
                     i++;
                     updateFlashcards(i);
@@ -84,8 +89,6 @@ public class FlashcardActivity extends AppCompatActivity {
             }
         });
 
-        done.setEnabled(true);
-        done.setBackgroundColor(Color.GREEN);
         done.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 AlarmReceiver.mediaPlayer.stop();
@@ -110,6 +113,7 @@ public class FlashcardActivity extends AppCompatActivity {
         final Flashcard flashcard = flashcards.get(i);
         //System.out.println(flashcard.getName());
         description.setText(flashcard.getContent());
+        next.setText("Next");
         term.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -135,6 +139,7 @@ public class FlashcardActivity extends AppCompatActivity {
                 return false;
             }
         });
+        term.setText("");
     }
 
     /*
