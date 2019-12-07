@@ -61,26 +61,32 @@ public class FlashcardActivity extends AppCompatActivity {
         done.setBackgroundColor(Color.RED);
         done.setEnabled(false);
         for (int i = 0; i < flashcards.size(); i++) {
+            System.out.println("in loop");
             final Flashcard flashcard = flashcards.get(i);
+            System.out.println(flashcard.getName());
             description.setText(flashcard.getContent());
             term.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                        System.out.println(flashcard.getName());
                         if (term.getText().equals(flashcard.getName())) {
                             result.setText("Correct!");
                             result.setTextColor(Color.GREEN);
                         } else {
                             result.setText("Wrong!");
                             result.setTextColor(Color.RED);
-                            new AlertDialog.Builder(getParent())
-                                    .setMessage("The correct answer is \\\" " + flashcard.getName() + " \\\"")
-                                    .setNeutralButton(android.R.string.ok, null).show();
-                            return true;
+//                            new AlertDialog.Builder(getParent())
+//                                    .setMessage("The correct answer is \\\" " + flashcard.getName() + " \\\"")
+//                                    .setNeutralButton(android.R.string.ok, null).show();
+                            term.setText(flashcard.getName());
+                            System.out.println(flashcard.getName());
+//                            return true;
 
                         }
                         next.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View v) {
+                                System.out.println("Next button pressed");
                                 result.setText("");
                                 //set the card to be next description tag of card
                             }
