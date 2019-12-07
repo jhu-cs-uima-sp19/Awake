@@ -43,6 +43,10 @@ After sprint 2, our app now has the following features:
 4. The exercise activity launches once the alarm rings and the shaking feature works properly.
 * Note that the app is sensitive to changes in acceleration so violent shakes can cause the count to repeatly decrease, almost as if it is decreasing by increments of more than one.
 5. Alarms can ring even when phone is off.
+6. Once the flashcard activity is selected, the user will be taken to a new screen to manage flashcard sets, where the user can manage create/delete sets.
+7. Upon clicking a set, the user will be able to access the cards of the set and modify their contents.
+8. The flashcard activity launches once the alarm rings and displays cards, where the user must input the appropriate term. 
+9. Once the set is complete, the user can shut off the alarm.
 
 The tests we have conducted to verify the repeat function of the alarm:
 1. Non-repeating alarms:
