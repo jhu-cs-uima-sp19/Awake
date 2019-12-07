@@ -3,6 +3,7 @@ package com.example.awake;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,28 +67,26 @@ public class FlashcardsAdapter extends ArrayAdapter<Flashcard> {
         term_view.setText(f.getName());
         definition_view.setText(f.getContent());
 
-        term_view.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-                f.setName(term_view.getText().toString());
-                notifyDataSetChanged();
+        term_view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
+                    f.setName(term_view.getText().toString());
+                    notifyDataSetChanged();
+                }
+                return false;
             }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        definition_view.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-                f.setName(definition_view.getText().toString());
-                notifyDataSetChanged();
+        definition_view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
+                    f.setContent(definition_view.getText().toString());
+                    notifyDataSetChanged();
+                }
+                return false;
             }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
         delete.setOnClickListener(new View.OnClickListener(){

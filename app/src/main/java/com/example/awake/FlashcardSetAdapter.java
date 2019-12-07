@@ -1,18 +1,16 @@
 package com.example.awake;
 
 import android.content.Context;
-import android.media.Image;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Button;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -52,19 +50,19 @@ public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
         ImageButton delete = (ImageButton) cardsetView.findViewById(R.id.delete_cardset);
 
         titleView.setText(cs.getTitle());
-        lenView.setText(String.valueOf(cs.getListlen()));
+        String cards = String.valueOf(cs.getListlen()) + " flashcards";
+        lenView.setText(cards);
 
-        titleView.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-                cs.setTitle(titleView.getText().toString());
-                notifyDataSetChanged();
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-        });
+        titleView.setOnKeyListener(new View.OnKeyListener() {
+                                       @Override
+                                       public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                                           if ((keyEvent.getAction() == KeyEvent.ACTION_DOWN) && (i == KeyEvent.KEYCODE_ENTER)) {
+                                               cs.setTitle(titleView.getText().toString());
+                                               notifyDataSetChanged();
+                                           }
+                                           return false;
+                                       }
+                                   });
 
 
         delete.setOnClickListener(new View.OnClickListener(){
