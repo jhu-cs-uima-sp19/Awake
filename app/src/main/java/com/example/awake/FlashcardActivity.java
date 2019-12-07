@@ -33,7 +33,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class FlashcardActivity extends AppCompatActivity {
 
     private TextView description;
@@ -74,16 +73,12 @@ public class FlashcardActivity extends AppCompatActivity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-<<<<<<< HEAD
-                System.out.println("Next button git ppressed");
-=======
                 if ( i == flashcards.size() - 1) {
                     next.setEnabled(false);
                     next.setVisibility(View.GONE);
                     done.setEnabled(true);
                     done.setBackgroundColor(Color.GREEN);
                 }
->>>>>>> 2c8fd4475594df72535b2bf7559a835c7b33d33c
                 if (i < flashcards.size() - 1) {
                     i++;
                     updateFlashcards(i);
@@ -136,12 +131,7 @@ public class FlashcardActivity extends AppCompatActivity {
 //                                    .setNeutralButton(android.R.string.ok, null).show();
                         //System.out.println(term.getText());
                         term.setText(flashcard.getName());
-<<<<<<< HEAD
-                        System.out.println(flashcard.getName());
-
-=======
                         //System.out.println(flashcard.getName());
->>>>>>> 2c8fd4475594df72535b2bf7559a835c7b33d33c
 //                            return true;
 
                     }
