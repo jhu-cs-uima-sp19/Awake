@@ -43,6 +43,9 @@ public class FlashcardActivity extends AppCompatActivity {
     private TextView result;
     private List<Flashcard> flashcards;
     public List<FlashcardSet> cardsets = new ArrayList<>();
+    private SharedPreferences sharedPref;
+    private int i = -1;
+    private int setnum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +55,12 @@ public class FlashcardActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Flashcards");
         //get flashcard
         readCards();
-        flashcards = cardsets.get(0).getCardlist();
+
+        sharedPref = getSharedPreferences("alarms", Context.MODE_PRIVATE);
+        setnum = sharedPref.getInt("FlashcardSet", 0);
+
+
+        flashcards = cardsets.get(setnum).getCardlist();
         //how to iterate between cards...
         description = (TextView) findViewById(R.id.flashcardtext);
         term = (EditText) findViewById(R.id.entertext);
@@ -61,42 +69,21 @@ public class FlashcardActivity extends AppCompatActivity {
         done = (Button) findViewById(R.id.done);
         done.setBackgroundColor(Color.RED);
         done.setEnabled(false);
-        for (int i = 0; i < flashcards.size(); i++) {
-            System.out.println("in loop");
-            final Flashcard flashcard = flashcards.get(i);
-            System.out.println(flashcard.getName());
-            description.setText(flashcard.getContent());
-            term.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                        System.out.println(flashcard.getName());
-                        if (term.getText().equals(flashcard.getName())) {
-                            result.setText("Correct!");
-                            result.setTextColor(Color.GREEN);
-                        } else {
-                            result.setText("Wrong!");
-                            result.setTextColor(Color.RED);
-//                            new AlertDialog.Builder(getParent())
-//                                    .setMessage("The correct answer is \\\" " + flashcard.getName() + " \\\"")
-//                                    .setNeutralButton(android.R.string.ok, null).show();
-                            term.setText(flashcard.getName());
-                            System.out.println(flashcard.getName());
-//                            return true;
+        next.setText("Start");
 
-                        }
-                        next.setOnClickListener(new View.OnClickListener() {
-                            public void onClick(View v) {
-                                System.out.println("Next button pressed");
-                                result.setText("");
-                                //set the card to be next description tag of card
-                            }
-                        });
-                    }
-                    return false;
+        next.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                System.out.println("Next button pressed");
+                if (i < flashcards.size() - 1) {
+                    i++;
+                    updateFlashcards(i);
+
                 }
-            });
-        }
+                result.setText("");
+                //set the card to be next description tag of card
+            }
+        });
+
         done.setEnabled(true);
         done.setBackgroundColor(Color.GREEN);
         done.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +100,38 @@ public class FlashcardActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AlarmReceiver.mediaPlayer.stop();
                 startActivity(new Intent(FlashcardActivity.this, MainActivity.class));
+            }
+        });
+    }
+
+    private void updateFlashcards(int i) {
+        next.setText("Next");
+        System.out.println("in loop");
+        final Flashcard flashcard = flashcards.get(i);
+        System.out.println(flashcard.getName());
+        description.setText(flashcard.getContent());
+        term.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    System.out.println(flashcard.getName());
+                    if (term.getText().equals(flashcard.getName())) {
+                        result.setText("Correct!");
+                        result.setTextColor(Color.GREEN);
+                    } else {
+                        result.setText("Wrong!");
+                        result.setTextColor(Color.RED);
+//                            new AlertDialog.Builder(getParent())
+//                                    .setMessage("The correct answer is \\\" " + flashcard.getName() + " \\\"")
+//                                    .setNeutralButton(android.R.string.ok, null).show();
+                        System.out.println(term.getText());
+                        term.setText(flashcard.getName());
+                        System.out.println(flashcard.getName());
+//                            return true;
+
+                    }
+                }
+                return false;
             }
         });
     }
