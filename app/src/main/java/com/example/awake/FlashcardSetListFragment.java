@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
@@ -28,6 +31,9 @@ public class FlashcardSetListFragment extends Fragment {
      */
     private MainActivity mA;
     private ListView cardset_list_view;
+    private Button donefcset;
+    private Button cancelfcset;
+    private List<String> oldtitles = new ArrayList<String>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,12 +42,24 @@ public class FlashcardSetListFragment extends Fragment {
         // Naming toolbar.
         mA.getSupportActionBar().setTitle("Manage Flashcards");
 
+        for (int i = 0; i < mA.cardsets.size(); i++) {
+            oldtitles.add(mA.cardsets.get(i).getTitle());
+        }
+
         //load a set here
         // ArrayList<Flashcard> list =
         // Use the view for this fragment to search for UI components.
         cardset_list_view = (ListView) view.findViewById(R.id.cardset_list);
-        FlashcardSetAdapter adapter = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, mA.cardsets);
+        final FlashcardSetAdapter adapter = new FlashcardSetAdapter(getActivity(), R.layout.flashcard_set, mA.cardsets);
         cardset_list_view.setAdapter(adapter);
+
+        cardset_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mA.setCardNumber(position);
+                mA.currentset = position;
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         final FloatingActionButton add = view.findViewById(R.id.add_cardset);
         add.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +71,29 @@ public class FlashcardSetListFragment extends Fragment {
                 update_list_view();
             }
         });
+
+        donefcset = view.findViewById(R.id.donefcset);
+        cancelfcset = view.findViewById(R.id.cancelfcset);
+
+        donefcset.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Update or create new alarm. THIS NEEDS TO BE UPDATED ONCE REPEATS ARE IMPLEMENTED.
+                save();
+                // Will switch in ListView fragment and update the ArrayAdapter.
+                mA.start_set_alarm_fragment();
+            }
+        });
+
+        cancelfcset.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Will switch in ListView fragment and update the ArrayAdapter.
+                for (int i = 0; i < mA.cardsets.size(); i++) {
+                    mA.cardsets.get(i).setTitle(oldtitles.get(i));
+                }
+                mA.start_set_alarm_fragment();
+            }
+        });
+
         return view;
     }
 
@@ -74,7 +115,7 @@ public class FlashcardSetListFragment extends Fragment {
         }
     }
 
-    public void onDetach() {
+    public void save() {
         Moshi moshi = new Moshi.Builder().build();
         Type type = Types.newParameterizedType(List.class, FlashcardSet.class);
         JsonAdapter<List> adapter = moshi.adapter(type);
@@ -93,7 +134,6 @@ public class FlashcardSetListFragment extends Fragment {
             e.printStackTrace();
         }
 
-        super.onDetach();
     }
 
 

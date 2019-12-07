@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
      * Load in flashcards: instantiate the variable
      */
     public List<FlashcardSet> cardsets = new ArrayList<>();
+    public int currentset = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,6 +226,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragmentContainer, new CustomizeShakesFragment());
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void setCardNumber(int i) {
+        SharedPreferences sharedPref = this.getSharedPreferences("alarms", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("FlashcardSet", i);
+        editor.apply();
     }
 
     /*

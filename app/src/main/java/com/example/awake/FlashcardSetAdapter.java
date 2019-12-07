@@ -11,9 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Color;
 
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  */
 public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
@@ -78,9 +80,14 @@ public class FlashcardSetAdapter extends ArrayAdapter<FlashcardSet>  {
             @Override
             public void onClick(View v) {
                 //do something
+                mA.setCardNumber(position);
                 mA.start_card_list_fragment();
             }
         });
+
+//        if (position == mA.currentset) {
+//            convertView.setBackgroundColor(Color.parseColor("#a9a9a9"));
+//        }
 
         return cardsetView;
     }
